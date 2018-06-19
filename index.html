@@ -3,6 +3,7 @@
   <head>
     <meta property="og:title" content="ได้รับโบนัสประจำวัน จากโป๊กเกอร์แลนด์" />
     <meta property="og:description" content="เลยอยากแบ่งปันรางวัลให้กับเพื่อนๆ กดที่ภาพนี้เพื่อรับรางวัลสูงสุดถึง 4 ล้านชิป" />
+    <meta property="og:type" content="product" />
     <meta property="og:image" content="https://pokerland.github.io/static/images/Poker_DailyReward_wallpost.png"/>
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="154" />
@@ -11,5 +12,35 @@
   </head>
   <body>
     Hello!
+    <a id="link-button">
+      <button>Deep link button</button>
+    </a>
+    
+    
+    <script>
+      const userAgent = navigator.userAgent;
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      document.querySelector('#link-button').href = `intent://claim?share_gen_key=${urlParams.get('share_gen_key')}&share_uid=${urlParams.get('share_uid')}#Intent;package=com.gameindy.poker;scheme=pokerland;end;`; 
+
+      let userBrowser;
+      if (userAgent.indexOf('Mobi') > -1 || userAgent.indexOf('Android') > -1) {
+        userBrowser = 'Mobile Browser';
+        
+        if (userAgent.indexOf('Chrome') > -1) {
+          userBrowser = 'Google Chrome';
+          // show modal
+        } else {
+          window.location.href = `pokerland://claim?share_gen_key=${urlParams.get('share_gen_key')}&share_uid=${urlParams.get('share_uid')};`;
+          setTimeout(() => {
+            window.location.href = 'itms-apps://itunes.apple.com/th/app/pokkexr-l-nd-pokerland/id1163709854?mt=8',
+            250
+          });
+        }
+      } else {
+        userBrowser = 'Desktop Browser'
+        window.location.href = 'https://poker.gameindy.com';
+      }
+    </script>
   </body>
 </html>
